@@ -18,11 +18,16 @@ origins = [
     "http://localhost:5050",
     "http://localhost:8000",
     "https://macrocounter-frontend.vercel.app/",
-    "https://*.macrocounter.juhamikael.me"
+    "https://*.macrocounter.juhamikael.me",
+    "https://macrocounter.juhamikael.me",
+    "http://*.macrocounter.juhamikael.me",
+    "*.macrocounter.juhamikael.me",
+
 ]
 app.add_middleware(
     DBSessionMiddleware,
     db_url=os.environ.get('DATABASE_URL'))
+
 
 app.include_router(user.router)
 app.include_router(food.router)
