@@ -12,9 +12,9 @@ load_dotenv()
 app = FastAPI()
 DATABASE_URL = os.getenv('DATABASE_URL')
 origins = [
-    "https://macrocounter-frontend.vercel.app/*",
-    "https://*.macrocounter.juhamikael.me/*",
-    "https://macrocounter.juhamikael.me/*",
+    "https://macrocounter-frontend.vercel.app*",
+    "https://projects.macrocounter.juhamikael.me/*",
+    "https://macrocounter.juhamikael.me*",
     "http://*.macrocounter.juhamikael.me/*",
     "*.macrocounter.juhamikael.me/*",
     "http://localhost:3000",
