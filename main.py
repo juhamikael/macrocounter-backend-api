@@ -17,8 +17,8 @@ origins = [
     "http://localhost:8080",
     "http://localhost:5050",
     "http://localhost:8000",
-    "https://macro-splitter-frontend.herokuapp.com",
-    "https://macro-splitter-api.herokuapp.com/api/v1/"
+    "https://macrocounter-frontend.vercel.app/",
+    "https://projects.macrocounter.juhamikael.me/"
 ]
 app.add_middleware(
     DBSessionMiddleware,
