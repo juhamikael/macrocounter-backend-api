@@ -11,33 +11,30 @@ load_dotenv()
 
 app = FastAPI()
 DATABASE_URL = os.getenv('DATABASE_URL')
-origins = [
-    "http://localhost:3000",
-    "http://localhost:*",
-    "http://localhost:8080",
-    "http://localhost:5050",
-    "http://localhost:8000",
-    "https://macrocounter-frontend.vercel.app/",
-    "https://*.macrocounter.juhamikael.me",
-    "https://macrocounter.juhamikael.me",
-    "http://*.macrocounter.juhamikael.me",
-    "*.macrocounter.juhamikael.me",
+origins = ["http://localhost:3000",
+           "http://localhost:*",
+           "http://localhost:8080",
+           "http://localhost:5050",
+           "http://localhost:8000",
+           "https://macrocounter-frontend.vercel.app/",
+           "https://*.macrocounter.juhamikael.me",
+           "https://macrocounter.juhamikael.me",
+           "http://*.macrocounter.juhamikael.me",
+           "*.macrocounter.juhamikael.me"]
 
-]
 app.add_middleware(
     DBSessionMiddleware,
     db_url=os.environ.get('DATABASE_URL'))
-
-
-app.include_router(user.router)
-app.include_router(food.router)
-app.include_router(food_eaten.router)
 
 app.add_middleware(CORSMiddleware,
                    allow_origins=origins,
                    allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"], )
+
+app.include_router(user.router)
+app.include_router(food.router)
+app.include_router(food_eaten.router)
 
 
 @app.get("/", tags=["ROOT"], summary="Root redirect")
