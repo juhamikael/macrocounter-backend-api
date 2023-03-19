@@ -26,15 +26,15 @@ app.add_middleware(
     DBSessionMiddleware,
     db_url=os.environ.get('DATABASE_URL'))
 
+app.include_router(user.router)
+app.include_router(food.router)
+app.include_router(food_eaten.router)
+
 app.add_middleware(CORSMiddleware,
                    allow_origins=origins,
                    allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"], )
-
-app.include_router(user.router)
-app.include_router(food.router)
-app.include_router(food_eaten.router)
 
 
 @app.get("/", tags=["ROOT"], summary="Root redirect")
