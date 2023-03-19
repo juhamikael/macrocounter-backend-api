@@ -33,7 +33,6 @@ app.include_router(food_eaten.router)
 
 app.add_middleware(CORSMiddleware,
                    allow_origins=origins,
-                   allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"], )
 
