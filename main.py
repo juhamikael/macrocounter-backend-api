@@ -16,11 +16,11 @@ origins = ["http://localhost:3000",
            "http://localhost:8080",
            "http://localhost:5050",
            "http://localhost:8000",
-           "https://macrocounter-frontend.vercel.app/",
-           "https://*.macrocounter.juhamikael.me",
-           "https://macrocounter.juhamikael.me",
-           "http://*.macrocounter.juhamikael.me",
-           "*.macrocounter.juhamikael.me"]
+           "https://macrocounter-frontend.vercel.app/*",
+           "https://*.macrocounter.juhamikael.me/*",
+           "https://macrocounter.juhamikael.me/*",
+           "http://*.macrocounter.juhamikael.me/*",
+           "*.macrocounter.juhamikael.me/*"]
 
 app.add_middleware(
     DBSessionMiddleware,
