@@ -11,21 +11,20 @@ load_dotenv()
 
 app = FastAPI()
 DATABASE_URL = os.getenv('DATABASE_URL')
-origins = [
-    "https://projects.macrocounter.juhamikael.info",
-    "https://macrocounter-frontend.vercel.app*",
-    "https://projects.macrocounter.juhamikael.me/*",
-    "https://macrocounter.juhamikael.me*",
-    "http://*.macrocounter.juhamikael.me/*",
-    "https://macrocounter.juhamikael.me"
-    "http://localhost:3000",
-    "http://localhost:*",
-    "http://localhost:8080",
-    "http://localhost:5050",
-    "http://localhost:8000",]
 
 app.add_middleware(CORSMiddleware,
-                   allow_origins=["*"],
+                   allow_origins=[
+                       "https://projects.macrocounter.juhamikael.info",
+                       "https://macrocounter-frontend.vercel.app*",
+                       "https://projects.macrocounter.juhamikael.me/*",
+                       "https://macrocounter.juhamikael.me*",
+                       "http://*.macrocounter.juhamikael.me/*",
+                       "https://macrocounter.juhamikael.me"
+                       "http://localhost:3000",
+                       "http://localhost:*",
+                       "http://localhost:8080",
+                       "http://localhost:5050",
+                       "http://localhost:8000"],
                    allow_methods=["*"],
                    allow_headers=["*"], )
 
