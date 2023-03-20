@@ -16,7 +16,7 @@ app.add_middleware(CORSMiddleware,
                    allow_origins=[
                        "https://projects.macrocounter.juhamikael.info",
                        "https://macrocounter-frontend.vercel.app*",
-                       "https://projects.macrocounter.juhamikael.me/*",
+                       "https://projects.macrocounter.juhamikael.me",
                        "https://macrocounter.juhamikael.me*",
                        "http://*.macrocounter.juhamikael.me/*",
                        "https://macrocounter.juhamikael.me"
