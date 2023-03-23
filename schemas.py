@@ -3,8 +3,22 @@ from userdataprocess.ActivityLevel import ActivityType
 from userdataprocess.BMR import Gender
 from userdataprocess.MacroSplit import BodyType
 from userdataprocess.Calories import DietStyle
+from uuid import UUID
+
 
 genders = ["male", "female"]
+
+
+class CreateNewUserOAuth(BaseModel):
+    id: UUID
+    email: str
+    name: str
+    image: str
+    is_active: bool = True
+    verified: bool = False
+
+    class Config:
+        orm_mode = True
 
 
 class UserIn(BaseModel):

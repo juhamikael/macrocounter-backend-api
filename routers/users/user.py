@@ -6,8 +6,11 @@ from schemas import \
     UserUpdate as SchemaUserUpdate, \
     UpdateAge as SchemaUpdateAge, \
     UpdateHeight as SchemaUpdateHeight, \
-    UpdateWeight as SchemaUpdateWeight
-from models import ProcessedData, User
+    UpdateWeight as SchemaUpdateWeight, \
+    CreateNewUserOAuth as SchemaCreateNewUserOAuth
+
+from models import ProcessedData, User, RegisteredOAuthUsers
+import uuid
 
 router = APIRouter()
 
@@ -65,14 +68,33 @@ async def create_user(new_user: SchemaUser):
     return processor
 
 
+@router.post("/api/v1/users/oauth", tags=["Post"], summary="Create users", response_model=SchemaCreateNewUserOAuth)
+async def create_oauth_user(new_user: SchemaCreateNewUserOAuth):
+    # Query to check if user exists
+    new_user_obj = RegisteredOAuthUsers(
+        id=str(uuid.uuid4()),
+        email=new_user.email,
+        name=new_user.name,
+        image=new_user.image,
+        is_active=new_user.is_active,
+        verified=new_user.verified
+    )
+    db.session.add(new_user_obj)
+    db.session.commit()
+    return new_user_obj
+
+
 ######################################################################################################################
 # PUT
 ######################################################################################################################
+
+
 @router.put("/api/v1/users/{user_id}", tags=["Update"], status_code=status.HTTP_202_ACCEPTED)
 def update_user(user_id: int, request: SchemaUserUpdate):
     query = select_user_where_id(user_id)
     user_f.update_user_basic_info(query, request)
-    new_query = db.session.query(ProcessedData).filter(User.id == user_id).first()
+    new_query = db.session.query(ProcessedData).filter(
+        User.id == user_id).first()
     user_f.update_user_processed_data(new_query)
     return f"User {user_id} info updated"
 
@@ -113,6 +135,7 @@ def update_user_weight(user_id: int, request: SchemaUpdateWeight):
 @router.delete("/api/v1/users/{user_id}", tags=["Delete"], summary="Delete user by id")
 def delete_user(user_id: int):
     check_if_exist = select_user_where_id(user_id)
-    db.session.query(User).filter(User.id == user_id).delete(synchronize_session=False)
+    db.session.query(User).filter(
+        User.id == user_id).delete(synchronize_session=False)
     db.session.commit()
     return f"User {user_id} deleted"

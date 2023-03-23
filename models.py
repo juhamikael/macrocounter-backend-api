@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, String, Float
+from sqlalchemy import Column, ForeignKey, Integer, String, Float, UUID, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy import create_engine
@@ -62,6 +62,15 @@ class FoodEaten(Base):
     fat = Column(Float)
     calories = Column(Integer)
     time = Column(String(64))
+
+
+class RegisteredOAuthUsers(Base):
+    __tablename__ = "authenticated_users"
+    id = Column(UUID, primary_key=True, index=True)
+    name = Column(String(64))
+    email = Column(String(128), unique=True)
+    image = Column(String(256))
+    is_active = Column(Boolean, default=True)
 
 
 Base.metadata.create_all(engine)
