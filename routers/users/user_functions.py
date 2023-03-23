@@ -50,8 +50,6 @@ def data_processor(request):
         daily_carbs=macro_split.carbs,
         daily_fat=macro_split.fat,
     )
-    print("ee: ", processed_data.__dict__)
-
     return processed_data
 
 
