@@ -12,13 +12,27 @@ class DietStyle(str, Enum):
 
 
 class CaloriesIntake:
-    def __init__(self, bmr: int, activity_level: int, diet_style: str):
+    def __init__(self, bmr: int, activity_level: int, diet_style: str, age: int):
         self._diet_style = diet_style
         self.bmr = bmr
         self.activity_level = activity_level
+        self.age = age
         self._weight_loss_multiplier = None
+        self._age_multiplier = None
         self._calories_daily = None
         self._calories_weekly = None
+
+    @property
+    def age_multiplier(self):
+        if self.age < 30:
+            self._age_multiplier = 1
+        elif 30 <= self.age < 50:
+            self._age_multiplier = 0.95
+        elif 50 <= self.age < 70:
+            self._age_multiplier = 0.9
+        else:
+            self._age_multiplier = 0.85
+        return self._age_multiplier
 
     @property
     def weight_loss_multiplier(self):
@@ -42,8 +56,8 @@ class CaloriesIntake:
 
     @property
     def calories_daily(self):
-        return int(self.bmr * self.weight_loss_multiplier * self.activity_level)
+        return int(self.bmr * self.weight_loss_multiplier * self.activity_level * self.age_multiplier)
 
     @property
     def calories_weekly(self):
-        return int(self.bmr * self.weight_loss_multiplier * self.activity_level * 7)
+        return int(self.bmr * self.weight_loss_multiplier * self.activity_level * self.age_multiplier * 7)
