@@ -19,12 +19,12 @@ app.add_middleware(CORSMiddleware,
                        "https://projects.macrocounter.juhamikael.me",
                        "https://macrocounter.juhamikael.me*",
                        "http://*.macrocounter.juhamikael.me/*",
-                       "https://macrocounter.juhamikael.me"
+                       "https://macrocounter.juhamikael.me",
                        "http://localhost:3000",
-                       "http://localhost:*",
                        "http://localhost:8080",
                        "http://localhost:5050",
                        "http://localhost:8000"],
+                   allow_credentials=True,
                    allow_methods=["*"],
                    allow_headers=["*"], )
 
